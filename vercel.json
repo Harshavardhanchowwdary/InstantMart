@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/InstantMart/assets/(.*)",
+      "destination": "/assets/$1"
+    },
+    {
       "source": "/InstantMart",
       "destination": "/index.html"
     },
