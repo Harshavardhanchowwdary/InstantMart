@@ -1,0 +1,16 @@
+{
+  "rewrites": [
+    {
+      "source": "/InstantMart",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/InstantMart/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/InstantMart/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
