@@ -8,7 +8,7 @@ import {
     assets,
 } from "../../../assets/assets";
 
-import RegisterForm from "./Components/RegisterForm";
+import RegisterForm from "./components/RegisterForm";
 
 
 const Register = () => {
