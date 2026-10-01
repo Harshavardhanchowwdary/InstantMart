@@ -1,0 +1,115 @@
+/* =========================================
+   INSTANTMART PAGE LOADER
+   ========================================= */
+
+.page-loader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--color-background);
+}
+
+
+/* =========================================
+   LOADER
+   ========================================= */
+
+.instantmart-loader {
+    width: min(660px, 90vw);
+    height: auto;
+
+    overflow: visible;
+}
+
+
+/* =========================================
+   INDIVIDUAL LETTER
+   ========================================= */
+
+.instantmart-letter {
+
+    font-size: 44px;
+    font-weight: 600;
+
+    line-height: 1;
+
+    fill-opacity: 1;
+    stroke: none;
+
+    animation: instantMartLetter 2s ease-in-out infinite;
+
+    transform-box: fill-box;
+    transform-origin: center;
+}
+
+
+/* =========================================
+   LETTER LOADING ANIMATION
+   ========================================= */
+
+@keyframes instantMartLetter {
+
+    0% {
+        opacity: 0.25;
+        transform: scale(0.92);
+    }
+
+    25% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    75% {
+        opacity: 0.8;
+        transform: scale(0.98);
+    }
+
+    100% {
+        opacity: 0.25;
+        transform: scale(0.92);
+    }
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 600px) {
+
+    .instantmart-loader {
+        width: 94vw;
+    }
+
+    .instantmart-letter {
+        font-size: 58px;
+    }
+}
+
+
+/* =========================================
+   REDUCE MOTION
+   ========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .instantmart-letter {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+}
