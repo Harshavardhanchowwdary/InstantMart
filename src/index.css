@@ -574,3 +574,46 @@ button {
         opacity: 0;
     }
 }
+
+/* =========================================================
+   INSTANTMART BLOG — SIMPLE ANIMATIONS
+========================================================= */
+
+@keyframes blogFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.blog-page-enter {
+    animation: blogFadeIn 300ms ease-out both;
+}
+
+/* Simple transitions for blog links and buttons */
+.blog-interactive {
+    transition:
+        color 200ms ease,
+        background-color 200ms ease,
+        border-color 200ms ease;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .blog-page-enter {
+        animation: none;
+    }
+
+    .blog-page-enter *,
+    .blog-page-enter *::before,
+    .blog-page-enter *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+}

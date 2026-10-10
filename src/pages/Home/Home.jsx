@@ -1,4 +1,3 @@
-import CategoryMarquee from "./components/CategoryMarquee";
 import HeroBanner from "./components/HeroBanner";
 import HeroFeatures from "./components/HeroFeatures";
 import CategoriesSection from "./components/CategoriesSection";
@@ -13,7 +12,7 @@ const Home = () => {
         <div className="w-full">
             <HeroBanner />
             <HeroFeatures />
-            <CategoryMarquee />
+            {/* <CategoryMarquee /> */}
             <CategoriesSection />
             <PopularProducts />
             <PromoProducts />

@@ -1,187 +1,68 @@
-import {
-    ArrowRight,
-    Sparkles,
-} from "lucide-react";
 
+import { ArrowRight, Sparkles } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { dummyProducts } from "../../../assets/assets";
 import DealProductCard from "./DealProductCard";
 
-import { dummyProducts } from "../../../assets/assets";
-
-
 const DealsProductGrid = () => {
-
-    /*
-    |--------------------------------------------------------------------------
-    | DEAL PRODUCTS
-    |--------------------------------------------------------------------------
-    | Reuse the existing dummyProducts.
-    |
-    | Only products with a discount are shown in the Deals page.
-    | Higher discount products appear first.
-    |--------------------------------------------------------------------------
-    */
+    const navigate = useNavigate();
 
     const dealsProducts = [...dummyProducts]
-        .filter((product) => product.discount > 0)
-        .sort((a, b) => b.discount - a.discount)
+        .filter((product) => Number(product.discount) > 0)
+        .sort((a, b) => Number(b.discount) - Number(a.discount))
         .slice(0, 10);
-
 
     return (
         <section className="mt-8 pb-10">
-
-            {/* =================================================
-                HEADER
-            ================================================== */}
-
-            <div
-                className="
-                    mb-5
-                    flex
-                    flex-col
-                    gap-3
-
-                    sm:flex-row
-                    sm:items-end
-                    sm:justify-between
-                "
-            >
-
-                {/* =================================================
-                    TITLE
-                ================================================== */}
-
+            <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
                 <div>
-
-                    <div
-                        className="
-                            mb-1
-                            flex
-                            items-center
-                            gap-2
-                        "
-                    >
-                        <Sparkles
-                            size={15}
-                            strokeWidth={1.8}
-                            className="
-                                text-[var(--color-accent)]
-                            "
-                        />
-
-                        <span
-                            className="
-                                text-[9px]
-                                font-semibold
-                                uppercase
-                                tracking-[1.5px]
-                                text-[var(--color-accent)]
-                            "
-                        >
-                            Limited Time
+                    <div className="mb-2 flex items-center gap-2 text-[var(--color-accent)]">
+                        <Sparkles size={15} />
+                        <span className="text-[10px] font-semibold uppercase tracking-[1.5px]">
+                            Special offers
                         </span>
                     </div>
 
-
-                    <h2
-                        className="
-                            text-[24px]
-                            font-bold
-                            tracking-[-0.5px]
-                            text-[var(--color-text-primary)]
-
-                            sm:text-[28px]
-                        "
-                    >
+                    <h2 className="text-2xl font-bold tracking-tight text-[var(--color-text-primary)] sm:text-3xl">
                         Deals you'll want to grab
                     </h2>
 
-
-                    <p
-                        className="
-                            mt-1
-                            text-[10px]
-                            text-[var(--color-text-secondary)]
-
-                            sm:text-[11px]
-                        "
-                    >
-                        Fresh prices. Limited stock. Don't wait too long.
+                    <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
+                        Save on your everyday essentials.
                     </p>
-
                 </div>
-
-
-                {/* =================================================
-                    VIEW ALL
-                ================================================== */}
 
                 <button
                     type="button"
-                    className="
-                        group
-                        flex
-                        w-fit
-                        items-center
-                        gap-1.5
-                        text-[11px]
-                        font-semibold
-                        text-[var(--color-primary)]
-                        transition-all
-                        duration-300
-
-                        hover:text-[var(--color-accent)]
-                    "
+                    onClick={() => navigate("/products")}
+                    className="inline-flex w-fit items-center gap-2 text-sm font-semibold text-[var(--color-primary)] transition-colors hover:text-[var(--color-accent)]"
                 >
-                    View all deals
-
-                    <ArrowRight
-                        size={14}
-                        strokeWidth={1.8}
-                        className="
-                            transition-transform
-                            duration-300
-                            group-hover:translate-x-1
-                        "
-                    />
+                    View all products
+                    <ArrowRight size={16} />
                 </button>
-
             </div>
 
-
-            {/* =================================================
-                PRODUCTS GRID
-            ================================================== */}
-
-            <div
-                className="
-                    grid
-                    grid-cols-1
-                    gap-4
-
-                    min-[480px]:grid-cols-2
-
-                    md:grid-cols-3
-
-                    lg:grid-cols-4
-
-                    xl:grid-cols-5
-                "
-            >
-
-                {dealsProducts.map((product, index) => (
-                    <DealProductCard
-                        key={product.id}
-                        product={product}
-                        index={index}
-                    />
-                ))}
-
-            </div>
-
+            {dealsProducts.length > 0 ? (
+                <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4 xl:grid-cols-5">
+                    {dealsProducts.map((product) => (
+                        <DealProductCard
+                            key={product.id}
+                            product={product}
+                        />
+                    ))}
+                </div>
+            ) : (
+                <div className="rounded-xl border border-[var(--color-border-light)] bg-white px-5 py-12 text-center">
+                    <p className="font-semibold text-[var(--color-text-primary)]">
+                        No deals available right now
+                    </p>
+                    <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
+                        Please check back later for new offers.
+                    </p>
+                </div>
+            )}
         </section>
     );
 };
-
 
 export default DealsProductGrid;

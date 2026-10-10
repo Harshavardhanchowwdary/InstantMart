@@ -1,99 +1,34 @@
+
 import React from "react";
+import { tickerItems } from "../blogData";
 
-import {
-    tickerItems,
-} from "../blogData";
-
-
-
-const BlogTicker = ({
-    reverse = false,
-}) => {
-
-    const animationClass =
-        reverse
-            ? "animate-[blogTickerReverse_30s_linear_infinite]"
-            : "animate-[blogTicker_30s_linear_infinite]";
-
-
-
+const BlogTicker = () => {
     return (
-
-        <div
-            className="
-                relative
-                overflow-hidden
-                rounded-[18px]
-                border
-                border-[var(--color-primary)]/10
-                bg-[var(--color-primary-light)]
-                py-5
-            "
-        >
-
-            <div
-                className={`
-                    flex
-                    w-max
-                    ${animationClass}
-                `}
-            >
-
-                {[
-                    ...tickerItems,
-                    ...tickerItems,
-                ].map(
-                    (
-                        item,
-                        index
-                    ) => (
-
-                        <div
-                            key={
-                                `${item}-${index}-${reverse}`
-                            }
+        <div className="overflow-hidden border-y border-[var(--color-border)] py-4">
+            <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-3">
+                {tickerItems.map((item, index) => (
+                    <React.Fragment key={`${item}-${index}`}>
+                        <span
                             className="
-                                flex
-                                items-center
-                                gap-5
-                                pr-5
-                                whitespace-nowrap
+                                whitespace-nowrap text-[10px]
+                                font-bold uppercase tracking-[0.14em]
+                                text-[var(--color-primary)]
                             "
                         >
+                            {item}
+                        </span>
 
+                        {index !== tickerItems.length - 1 && (
                             <span
-                                className="
-                                    text-[10px]
-                                    font-bold
-                                    uppercase
-                                    tracking-[0.18em]
-                                    text-[var(--color-primary)]
-                                "
-                            >
-                                {item}
-                            </span>
-
-
-                            <span
-                                className="
-                                    h-1
-                                    w-1
-                                    rounded-full
-                                    bg-[var(--color-accent)]
-                                "
+                                aria-hidden="true"
+                                className="h-1 w-1 rounded-full bg-[var(--color-accent)]"
                             />
-
-                        </div>
-
-                    )
-                )}
-
+                        )}
+                    </React.Fragment>
+                ))}
             </div>
-
         </div>
     );
 };
-
-
 
 export default BlogTicker;

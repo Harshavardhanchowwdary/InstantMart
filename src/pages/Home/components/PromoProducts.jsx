@@ -1,222 +1,82 @@
+
 import { ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { dummyProducts } from "../../../assets/assets";
 
-
 const PromoProducts = () => {
-
+    const navigate = useNavigate();
     const promoProducts = dummyProducts.slice(0, 2);
 
     return (
-        <section
-            className="
-                w-full
-                bg-[var(--color-background)]
-                py-8
-                sm:py-9
-                lg:py-10
-            "
-        >
-
-            {/* HEADER */}
+        <section className="w-full bg-[var(--color-background)] py-8 sm:py-10">
+            {/* Section heading */}
             <div className="mb-5">
-
-                <span
-                    className="
-                        text-[9px]
-                        font-semibold
-                        uppercase
-                        tracking-[1.8px]
-                        text-[var(--color-accent)]
-                    "
-                >
-                    Special Offers
+                <span className="text-[10px] font-semibold uppercase tracking-[1.6px] text-[var(--color-accent)]">
+                    Special offers
                 </span>
 
-                <h2
-                    className="
-                        mt-1
-                        text-[24px]
-                        font-bold
-                        tracking-[-0.5px]
-                        text-[var(--color-text-primary)]
-                        sm:text-[27px]
-                    "
-                >
+                <h2 className="mt-1 text-2xl font-bold tracking-tight text-[var(--color-text-primary)] sm:text-[27px]">
                     Fresh Deals
                 </h2>
-
             </div>
 
-
-            {/* PROMO CARDS */}
-            <div
-                className="
-                    grid
-                    grid-cols-1
-                    gap-4
-                    sm:grid-cols-2
-                "
-            >
-
+            {/* Promotional cards */}
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 {promoProducts.map((product, index) => (
-
                     <article
-                        key={product._id}
-                        className={`
-                            group
-                            relative
-                            min-h-[185px]
-                            overflow-hidden
-                            rounded-[18px]
-                            p-5
-                            transition-all
-                            duration-500
-                            hover:-translate-y-1
-                            hover:shadow-[0_12px_25px_rgba(0,69,33,0.10)]
-                            sm:min-h-[210px]
-                            sm:p-6
-                            ${
-                                index === 0
-                                    ? "bg-[#f7f3e9]"
-                                    : "bg-[#e1f1dc]"
-                            }
-                        `}
+                        key={product._id ?? product.id ?? product.name}
+                        className={`group relative flex min-h-[190px] items-center overflow-hidden rounded-2xl p-5 transition-transform duration-200 hover:-translate-y-0.5 sm:min-h-[210px] sm:p-6 ${
+                            index === 0
+                                ? "bg-[#f5f2e9]"
+                                : "bg-[#e5f2e2]"
+                        }`}
                     >
-
-                        {/* CONTENT */}
-
-                        <div
-                            className="
-                                relative
-                                z-10
-                                w-[55%]
-                            "
-                        >
-
-                            {/* DISCOUNT */}
-
-                            <span
-                                className="
-                                    inline-flex
-                                    rounded-full
-                                    bg-white
-                                    px-3
-                                    py-1
-                                    text-[8px]
-                                    font-semibold
-                                    text-[var(--color-text-primary)]
-                                    shadow-sm
-                                "
-                            >
-                                Flat {product.discount}% Discount
+                        {/* Product details */}
+                        <div className="relative z-10 w-[65%] sm:w-[62%]">
+                            <span className="inline-flex rounded-full bg-white px-3 py-1.5 text-[10px] font-semibold text-[var(--color-primary)] shadow-sm">
+                                {product.discount > 0
+                                    ? `Save ${product.discount}%`
+                                    : "Special offer"}
                             </span>
 
-
-                            {/* PRODUCT NAME */}
-
-                            <h3
-                                className="
-                                    mt-4
-                                    text-[21px]
-                                    font-bold
-                                    leading-[1.05]
-                                    tracking-[-0.5px]
-                                    text-[var(--color-text-primary)]
-                                    sm:text-[25px]
-                                "
-                            >
+                            <h3 className="mt-4 line-clamp-2 text-xl font-bold leading-tight tracking-tight text-[var(--color-text-primary)] sm:text-2xl">
                                 {product.name}
                             </h3>
 
-
-                            {/* DESCRIPTION */}
-
-                            <p
-                                className="
-                                    mt-2
-                                    hidden
-                                    max-w-[220px]
-                                    text-[10px]
-                                    leading-4
-                                    text-[var(--color-text-secondary)]
-                                    sm:block
-                                "
-                            >
+                            <p className="mt-2 line-clamp-2 text-xs leading-5 text-[var(--color-text-secondary)]">
                                 {product.description}
                             </p>
 
-
-                            {/* SHOP NOW */}
-
                             <button
                                 type="button"
-                                className="
-                                    mt-4
-                                    flex
-                                    items-center
-                                    gap-1.5
-                                    rounded-full
-                                    bg-[var(--color-primary)]
-                                    px-4
-                                    py-2
-                                    text-[9px]
-                                    font-semibold
-                                    text-white
-                                    transition-all
-                                    duration-300
-                                    hover:bg-[var(--color-accent)]
-                                    hover:gap-2.5
-                                "
+                                onClick={() =>
+                                    navigate(
+                                        `/products/category/${product.category}`
+                                    )
+                                }
+                                className={`mt-4 inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-xs font-semibold text-white transition-colors duration-200 ${
+                                    index === 0
+                                        ? "bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)]"
+                                        : "bg-[var(--color-accent)] hover:bg-[var(--color-accent-dark)]"
+                                }`}
                             >
-                                <span className="text-[12px]">Shop Now</span>
-
-                                <ArrowRight
-                                    size={11}
-                                    strokeWidth={2}
-                                />
+                                Shop now
+                                <ArrowRight size={14} />
                             </button>
-
                         </div>
 
-
-                        {/* PRODUCT IMAGE */}
-
-                        <div
-                            className="
-                                absolute
-                                bottom-0
-                                right-[-10px]
-                                flex
-                                h-full
-                                w-[50%]
-                                items-end
-                                justify-end
-                            "
-                        >
-
+                        {/* Product image */}
+                        <div className="absolute inset-y-0 right-0 flex w-[39%] items-center justify-center p-3 sm:w-[40%] sm:p-4">
                             <img
                                 src={product.image}
                                 alt={product.name}
-                                className="
-                                    h-[90%]
-                                    w-full
-                                    object-contain
-                                    object-right-bottom
-                                    transition-transform
-                                    duration-500
-                                    ease-out
-                                    group-hover:scale-110
-                                "
+                                loading="lazy"
+                                className="max-h-[145px] w-full object-contain transition-transform duration-300 ease-out group-hover:scale-105 sm:max-h-[165px]"
                             />
-
                         </div>
-
                     </article>
-
                 ))}
-
             </div>
-
         </section>
     );
 };

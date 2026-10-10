@@ -1,110 +1,82 @@
-
 import React from "react";
-import { ArrowUpRight, ChevronRight } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { categoriesData } from "../../../assets/assets";
 
 const CategoriesSection = () => {
     return (
-        <section className="relative mt-[90px] w-full overflow-hidden bg-[var(--color-primary-light)] px-4 py-8 sm:px-6 sm:py-10 md:px-10 md:py-12 lg:px-14 lg:py-14">
+        <section className="relative mt-12 w-full overflow-hidden bg-[var(--color-primary-light)] px-4 py-9 sm:px-6 md:px-10 md:py-10 lg:px-14">
 
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle,rgba(0,69,33,0.12)_1px,transparent_1px)] [background-size:26px_26px] [mask-image:linear-gradient(to_bottom,transparent,black_18%,black_82%,transparent)]" />
+            {/* Subtle dotted background */}
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle,rgba(0,69,33,0.08)_1px,transparent_1px)] [background-size:24px_24px]" />
 
-            <div className="pointer-events-none absolute -left-[80px] top-[80px] h-[180px] w-[180px] rounded-full bg-white opacity-40 blur-3xl animate-[categoryOrbFloat_9s_ease-in-out_infinite]" />
+            {/* Section Heading */}
+            <div className="relative mx-auto mb-8 max-w-2xl text-center">
 
-            <div className="pointer-events-none absolute -bottom-[40px] -right-[70px] h-[160px] w-[160px] rounded-full bg-[var(--color-accent-light)] opacity-50 blur-3xl animate-[categoryOrbFloat_9s_ease-in-out_-3s_infinite]" />
-
-
-            <div className="relative z-10 mx-auto mb-10 max-w-[650px] text-center animate-[categoryHeadingIn_600ms_cubic-bezier(0.22,1,0.36,1)_both]">
-
-                <span className="mb-1.5 inline-block text-[14px] font-semibold uppercase tracking-[1.8px] text-[var(--color-accent)]">
-                    Shop by category
+                <span className="text-xs font-semibold uppercase tracking-[2px] text-[var(--color-accent)] sm:text-sm">
+                    Shop by Category
                 </span>
 
-                <h2 className="text-[24px] font-bold leading-tight tracking-[-0.5px] text-[var(--color-text-primary)] sm:text-[27px] md:text-[30px]">
+                <h2 className="mt-2 text-2xl font-bold tracking-tight text-[var(--color-text-primary)] sm:text-3xl">
                     Explore Our Categories
                 </h2>
 
-                <p className="mx-auto mt-1.5 max-w-[430px] text-[10px] leading-[16px] text-[var(--color-text-secondary)] sm:text-[11px] sm:leading-[18px]">
-                    Find exactly what you need using our carefully curated grocery categories.
+                <p className="mx-auto mt-3 max-w-md text-sm leading-6 text-[var(--color-text-secondary)]">
+                    Find exactly what you need from our carefully curated grocery categories.
                 </p>
 
-                <div className="mx-auto mt-4 h-[2px] w-[42px] rounded-full bg-[var(--color-accent)] animate-[categoryLinePulse_3s_ease-in-out_infinite]" />
+                <div className="mx-auto mt-4 h-1 w-12 rounded-full bg-[var(--color-accent)]" />
 
             </div>
 
+            {/* Categories Grid */}
+            <div className="relative mx-auto grid w-full max-w-5xl grid-cols-2 justify-items-center gap-x-4 gap-y-7 sm:grid-cols-3 sm:gap-x-6 md:grid-cols-4 md:gap-y-8 lg:grid-cols-5">
 
-            <div className="relative z-10 mx-auto grid w-full max-w-[900px] grid-cols-2 place-items-center gap-x-5 gap-y-12 sm:grid-cols-3 sm:gap-x-8 sm:gap-y-14 md:grid-cols-4 md:gap-x-10 md:gap-y-16 lg:grid-cols-5 lg:gap-x-12 lg:gap-y-16">
-
-                {categoriesData.map((category, index) => (
-
+                {categoriesData.map((category) => (
                     <NavLink
                         key={category.slug}
                         to={`/products/category/${category.slug}`}
-                        style={{
-                            "--category-delay": `${index * 70}ms`,
-                        }}
                         className={({ isActive }) =>
-                            `category-item group relative flex w-[120px] flex-col items-center outline-none animate-[categoryItemIn_550ms_cubic-bezier(0.22,1,0.36,1)_var(--category-delay)_both] transition-transform duration-300 ease-out hover:-translate-y-1.5 ${
-                                isActive ? "scale-[1.02]" : ""
+                            `group flex w-full max-w-[150px] flex-col items-center rounded-xl p-2 text-center transition-transform duration-200 hover:-translate-y-1 ${
+                                isActive
+                                    ? "text-[var(--color-primary-dark)]"
+                                    : "text-[var(--color-primary)]"
                             }`
                         }
                     >
                         {({ isActive }) => (
                             <>
-
-                                <div className="pointer-events-none absolute left-1/2 top-[78px] z-0 h-[42px] w-[90px] -translate-x-1/2 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-
-                                    <span className="absolute left-1/2 top-0 h-full -translate-x-1/2 border-l border-dashed border-[var(--color-accent)] animate-[categoryDotsMove_700ms_linear_infinite]" />
-
-                                    <span className="absolute bottom-0 left-1/2 h-[5px] w-[5px] -translate-x-1/2 rounded-full bg-[var(--color-accent)] shadow-[0_0_0_4px_var(--color-accent-light)]" />
-
-                                </div>
-
-
-                                <div className={`relative z-10 flex h-[82px] w-[82px] items-center justify-center rounded-full border bg-white shadow-[0_4px_14px_rgba(0,69,33,0.06)] transition-all duration-400 ease-out ${isActive ? "border-[var(--color-primary)] shadow-[0_8px_22px_rgba(0,69,33,0.14)]" : "border-white group-hover:border-[var(--color-primary)] group-hover:shadow-[0_12px_28px_rgba(0,69,33,0.15)]"}`}>
-
+                                {/* Category Image */}
+                                <div
+                                    className={`flex h-[76px] w-[76px] items-center justify-center overflow-hidden rounded-full bg-white shadow-sm transition-shadow duration-200 group-hover:shadow-md sm:h-[88px] sm:w-[88px] ${
+                                        isActive
+                                            ? "ring-2 ring-[var(--color-primary)] ring-offset-2"
+                                            : ""
+                                    }`}
+                                >
                                     <img
                                         src={category.image}
                                         alt={category.name}
-                                        className="h-full w-full rounded-full object-cover transition-transform duration-500 ease-out group-hover:scale-110 group-hover:rotate-2"
+                                        loading="lazy"
+                                        className="h-full w-full rounded-full object-cover transition-transform duration-200 group-hover:scale-105"
                                     />
-
-                                    <span className={`absolute inset-0 rounded-full bg-[var(--color-primary)] transition-opacity duration-300 ${isActive ? "opacity-[0.08]" : "opacity-0 group-hover:opacity-[0.08]"}`} />
-
-                                    <span className="absolute -inset-[6px] rounded-full border border-dashed border-[var(--color-accent)] opacity-0 transition-opacity duration-300 group-hover:opacity-60 group-hover:animate-[categoryRingSpin_6s_linear_infinite]" />
-
                                 </div>
 
-
-                                <span className={`mt-3 text-center text-[12px] leading-[15px] transition-all duration-300 ${isActive ? "font-semibold text-[var(--color-primary-dark)]" : "font-medium text-[var(--color-primary)] group-hover:font-semibold group-hover:text-[var(--color-primary-dark)]"}`}>
+                                {/* Category Name */}
+                                <span className="mt-2.5 text-xs font-medium leading-5 sm:text-sm">
                                     {category.name}
                                 </span>
 
-
-                                <span className={`mt-1 h-[2px] rounded-full bg-[var(--color-accent)] transition-all duration-350 ${isActive ? "w-[28px]" : "w-0 group-hover:w-[26px]"}`} />
-
-
-                                <span className="absolute -top-[18px] left-1/2 z-30 flex -translate-x-1/2 translate-y-2 items-center gap-1 whitespace-nowrap rounded-full bg-[var(--color-primary)] px-2.5 py-1.5 text-[11px] font-semibold text-white opacity-0 shadow-[0_6px_16px_rgba(0,69,33,0.16)] transition-all duration-250 group-hover:translate-y-0 group-hover:opacity-100">
-
-                                    Explore {category.name}
-
-                                    <ArrowUpRight size={10} strokeWidth={2} />
-
-                                </span>
-
-
-                                {isActive && (
-                                    <span className="mt-1 flex items-center gap-0.5 text-[8px] font-semibold text-[var(--color-accent)] animate-[categoryActiveIn_300ms_ease-out_both]">
-                                        Shop now
-                                        <ChevronRight size={9} />
-                                    </span>
-                                )}
-
+                                {/* Simple Active Indicator */}
+                                <span
+                                    className={`mt-1 h-1 rounded-full bg-[var(--color-accent)] transition-all duration-200 ${
+                                        isActive
+                                            ? "w-7"
+                                            : "w-0 group-hover:w-6"
+                                    }`}
+                                />
                             </>
                         )}
                     </NavLink>
-
                 ))}
 
             </div>
